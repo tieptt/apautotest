@@ -12,8 +12,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import atomisystems.com.apobject.APCanvas;
 import atomisystems.com.apobject.APContent;
 import atomisystems.com.apobject.APPresentation;
+import atomisystems.com.apobject.APRadioButton;
 import atomisystems.com.apobject.APSidebar;
 import atomisystems.com.webdriver.DriverManager;
 import atomisystems.com.webdriver.DriverManagerFactory;
@@ -45,19 +47,15 @@ public class AppTest {
 
     @Test
     public void launchATest() {
-        driver.get("http://localhost:19481/Untitled291532510672719/test.html");
-        WebElement ePresenter = driver.findElement(By.id("X5iGjLuX"));
+        driver.get("http://localhost:23324/Untitled281532511849902/test.html");
+        WebElement ePresenter = driver.findElement(By.id("MevankN9"));
         APPresentation apPresenter = new APPresentation(ePresenter);
         APContent apContent = apPresenter.getContentElement();
         //Assert.assertEquals(apContent, null);
-        APSidebar apSidebar = apContent.getSidebar();
-        apSidebar.onClickTocByIndex(2);
-        await("Wait for alert").atMost(2, SECONDS)
-        .ignoreExceptions();
-        apSidebar.onClickTocByIndex(3);
-        await("Wait for alert").atMost(1, SECONDS)
-        .ignoreExceptions();
-        apSidebar.onClickTocByIndex(1);
+        APCanvas apCanvas = apContent.getCanvas();
+        APRadioButton radio = new APRadioButton(apCanvas.getElementByID("ap-ctrl-MevankN9-1-6"));
+        boolean isCheck = radio.isChecked();
+        Assert.assertEquals(isCheck, false);
     }
 
 }
