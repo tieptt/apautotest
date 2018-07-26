@@ -12,7 +12,15 @@ public class APSlide extends APObject{
 		super(webElement);
 	}
 	
-	WebElement getElementById(String id) {
-		return _webElement.findElement(By.id(id));
+	public WebElement getElementByIndex(int nIndex) {
+		String xpath = String.format("///div[%d]", nIndex);
+		WebElement element = _webElement.findElement(By.xpath(xpath));
+		return element;
+	}
+	
+	public WebElement getElementByID(String id) {
+		String xpath = String.format("//div[@id='%s']", id);
+		WebElement element = _webElement.findElement(By.xpath(xpath));
+		return element;
 	}
 }
